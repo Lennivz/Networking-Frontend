@@ -1,7 +1,30 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DefaultComponent } from './layouts/default/default.component';
+import { HomeComponent } from './pages/home/home.component';
+import { CoursesComponent } from './pages/courses/courses.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    component: DefaultComponent,
+    path: '',
+    children: [
+      {
+        component: HomeComponent,
+        path: 'home'
+      },
+      {
+        path: 'courses',
+        component: CoursesComponent
+      },
+      {
+        path: '**', // Wildcard route for a 404 page
+        redirectTo: 'home',
+        pathMatch: 'full'
+      }
+    ]
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
